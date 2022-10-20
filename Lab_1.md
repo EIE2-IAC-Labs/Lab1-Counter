@@ -150,7 +150,7 @@ This runs very fast, and you may think that nothing happened.  However, if you e
 
 **Step 6:**  Plot the counter waveforms with GTKwave: 
 
-Start the GTKwave program on your laptop. Select *File -> Open New Tab* and select **_Vcounter.vcd_** file.  A GTKwave window will appear.  Click *Top -> counter*, followed by the signals: **_clk, rst, en_** and **_count[7:0]_**.  
+Start the GTKwave program on your laptop. Select *File -> Open New Tab* and select **_counter.vcd_** file.  A GTKwave window will appear.  Click *Top -> counter*, followed by the signals: **_clk, rst, en_** and **_count[7:0]_**.  
 Use the + and - icons to adjust the zoom level.  You should see the following. 
 
 ![gtkWave](images/waveform.jpg)
