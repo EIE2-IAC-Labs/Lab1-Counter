@@ -6,7 +6,7 @@
 
 
 ## Lab 1 – Learning System Verilog with Verilator and Vbuddy
-##### *Peter Cheung, v1.1 - 19 Oct 2022*
+##### *Peter Cheung, v1.2 - 20 Oct 2022*
 
 ---
 ## Objectives
@@ -66,13 +66,37 @@ Vbuddy is so named because it is a companion (or buddy) to Verilator, Verilog an
 ______
 ## Task1 - Simulating a basic 8-bit binary counter
 
-**Step 1: Create a folder tree** on your local disk for this module. 
+**Step 1: Create a folder tree** on your local disk for this module.
 
 The easiest way to achieve this is to "fork" **this github repository** (repo) to your github account. If you do not already have one, you need to create one for this module. Now you need to FORK this repo to your github account, and then CLONE it onto your local disk. After successfuly clone the the Lab 1 repo to your disk, you should find a folder called Lab1-Counter.  This is your personal folder for Lab 1. You can add files to it and push them back to your github repo under your github account.
 
+Before cloning the repository, make sure to change directory to `~/Documents/iac`
+
+```bash
+user@host:~$ cd ~/Documents/iac
+```
+
+After cloning it, your directory structure should look like this
+
+```bash
+user@host:~/Documents/iac$ ls -lah
+drwxr-xr-x 1 user group 512 Oct 20 01:38 .
+drwxr-xr-x 1 user group 512 Oct 12 00:29 ..
+drwxr-xr-x 1 user group 512 Oct 20 01:38 Lab1-Counter
+drwxr-xr-x 1 user group 512 Oct 12 00:29 lab0-devtools
+```
+
 **Step 2:** Run VS Code and open the Lab1-Counter folder with:
 
-*File -> Open Folder* (then select the task1 folder)
+*File -> Open Folder* (then select the task1 folder, inside the Lab1-Counter folder)
+
+> If you're on Windows, VS Code must be running under WSL Ubuntu 22.04. In this case, the VS Code window should be titled as follows:
+>
+> ![image](https://user-images.githubusercontent.com/1413854/196830282-43d12cdc-aa74-457e-8cf2-ac241d495c0a.png)
+>
+> If your VS Code window title does not contain the WSL tag, you can use the button ![image](https://user-images.githubusercontent.com/1413854/196477312-9149e66e-3e31-4a98-bf19-f649bff29083.png) at the bottom left of VS Code to create a new WSL window by pressing it and choosing `New WSL Window using Distro...` with `Ubuntu-22.04`
+>
+> Likewise, any commands you run during this course will need to be ran under the VS Code terminal or the Ubuntu 22.04 terminal, not Command Prompt or Powershell.
 
 **Step 3:** Create a new System Verilog file (counter.sv), and enter the code shown on the right. You should include all the comments for future reference.  Colour highlight is automatic if you have installed the System Verilog package for VSC. The schematic representation of this basic counter is shown below. It counts on the positive edge of clk if enable is ‘1’.  It is synchronously reset to 0 if rst is asserted.  Save this file as counter.sv.
 
@@ -198,8 +222,14 @@ You should see device name as something similar this:
 
 ---
 **_Window Users_**
-(This instruction for PC is to be updated.)
-For PC users, you need to find the COMS Port used to connect to Vbuddy.  To do this, open the Device Manager, and you should see which COMS port (e.g. COM1 or COM6) is connect to Vbuddy via the USB cable.
+
+For PC users, you now need to find the COM Port used to communicate to Vbuddy. To do this, open Device Manager from the Start Menu and look for the `Ports (COM & LPT)` section. Expand this section and then connect Vbuddy to your computer. When the device is connected, you should see a new entry in this list with the COM port number associated with Vbuddy. This may change every so often, so make sure to check this when connecting your device.
+
+The respective device name is `/dev/ttyS{number}`
+
+For example, in the case of the picture below, the device name would be `/dev/ttyS3`. Make sure the `S` is a capital letter when you later use this value.
+
+![image](https://user-images.githubusercontent.com/1413854/196824390-356e0531-be49-490c-ae63-46149d22bd87.png)
 
 ---
 
