@@ -6,7 +6,7 @@
 
 
 ## Lab 1 – Learning System Verilog with Verilator and Vbuddy
-##### *Peter Cheung, v1.2 - 28 Oct 2022*
+##### *Peter Cheung, v1.3 - 28 Oct 2022*
 
 ---
 ## Objectives
