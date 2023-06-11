@@ -6,7 +6,7 @@ module counter #(
     input logic en,
     output logic [WIDTH - 1:0] count
 );
-always_ff @(posedge clk ) begin
+always_ff @(posedge clk or posedge rst) begin
     if (rst)    count<= {WIDTH{1'b0}};
     else        count<= count + {{WIDTH-1{1'b0}},en};
 end

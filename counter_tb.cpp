@@ -26,9 +26,13 @@ int main(int argc, char **argv, char **env){
         for (clk = 0; clk <2; clk++){
             tfp->dump (2*i+clk);
             top->clk = !top->clk;
+            if(i == 30){
+                top->rst = !top->rst;
+            }
             top->eval ();
         }
-        top->rst = (i<2)|(i == 15);
+        if(i != 30){
+        top->rst = (i<2)|(i == 15);}
         top->en  = (i>4);
         if(Verilated::gotFinish()) exit(0);
     }
