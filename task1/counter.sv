@@ -13,3 +13,4 @@ always_ff @ (posedge clk)
     else     count <= count + {{WIDTH-1{1'b0}}, en};
 
 endmodule
+
