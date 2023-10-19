@@ -1,6 +1,7 @@
 #include "Vcounter.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
+#include "vbuddy.cpp"
 
 int main(int argc, char **argv, char **env) {
     int i;
@@ -14,6 +15,10 @@ int main(int argc, char **argv, char **env) {
     VerilatedVcdC* tfp = new VerilatedVcdC;
     top->trace (tfp, 99);
     tfp->open ("counter.vcd");
+
+    // init Vbuddy
+    if (vbdOpen() != 1) return (-1);
+    vbdHeader("Lab 1: Counter");    
 
     // initialise simulation inputs
     top->clk = 1;
@@ -29,13 +34,23 @@ int main(int argc, char **argv, char **env) {
             top->clk = !top->clk; // top->clk is the clock signal, for every i (cycle) the clock signal goes up and down
             top->eval ();
         }
-        top->rst = (i <2) | (i == 23); // reset signal is high if cycle number is <2 or is cycle 23
-        top->en = (i>4); // enable signal is high when i becomes >4
-        if(i >= 14 && i < 17){ // the counter reaches 9 at cycle number 14, stopping for 3 cycles means stop until cycle 17
-            top->en = 0;
-        }
-        if (Verilated::gotFinish())  exit(0); // once the counting has done (300 cycles has past) then the programme will terminate
+
+        // ++++ Send count value to Vbuddy
+        vbdHex(4, (int(top->count) >> 16) & 0xF);
+        vbdHex(3, (int(top->count) >> 8) & 0xF);
+        vbdHex(2, (int(top->count) >> 4) & 0xF);
+        vbdHex(1, int(top->count) & 0xF);
+        vbdCycle(i+1);
+        // ---- end of Vbuddy output section
+
+        // change input stimuli
+        top->rst = (i <2) | (i == 15); // reset signal is high if cycle number is <2 or is cycle 15
+        top->en = (i>4);
+    
+        if (Verilated::gotFinish())  exit(0);
     }
+
+    vbdClose();
     tfp->close();
     exit(0);
 }
