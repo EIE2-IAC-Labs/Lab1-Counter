@@ -23,10 +23,11 @@ int main(int argc, char **argv, char **env) {
     // initialise simulation inputs
     top->clk = 1;
     top->rst = 1;
-    top->en = 0;
+    top->ld = 0;
+    top->v = vbdValue();
 
     // run simulation for many clock cycles
-    for (i=0; i<300; i++) { // i is the cycle number
+    for (i=0; i<1000; i++) { // i is the cycle number
         
         //dump variables into VCD file and toggle clock
         for (clk=0; clk<2; clk++) {
@@ -50,10 +51,10 @@ int main(int argc, char **argv, char **env) {
         // ---- end of Vbuddy output section
 
         // change input stimuli
-        // top->rst = (i <2) | (i == 15); // reset signal is high if cycle number is <2 or is cycle 15
-        top->rst = i<2; // we need this line cuz if not rst is always 1
-        // top->en = (i>4);
-        top->en = vbdFlag(); // making the Flag the one that enables and disables counting
+        top->rst = i<2;
+        vbdSetMode(1);
+        top->ld = vbdFlag();
+        top->v = vbdValue();
     
         if (Verilated::gotFinish())  exit(0);
     }

@@ -1,27 +1,25 @@
 module counter #(
-    parameter WIDTH = 8  // num of bits
+  parameter WIDTH = 8
 )(
-    // interface signals
-    input  logic             clk,        // clock
-    input  logic             rst,        // restart
-    input  logic             en,         // counter enable
-    output logic [WIDTH-1:0] count       // count output
+  // interface signals
+  input  logic             clk,      // clock 
+  input  logic             rst,      // reset 
+  input  logic             ld,       // load signal (load counter from data: when ld is asserted, the value v is loaded into the counter as a pre-set value)
+  input  logic [WIDTH-1:0] v,        // value to preload
+  output logic [WIDTH-1:0] count     // count output
 );
 
-/* // synchronous reset
-always_ff @ (posedge clk) 
-    if (rst) count <= {WIDTH{1'b0}};
-    else     count <= count + {{WIDTH-1{1'b0}}, en}; */
+/* // step 1: loadable counter
+always_ff @ (posedge clk)
+  if (rst) count <= {WIDTH{1'b0}};
+  else     count <= ld ? v : count + {{WIDTH-1{1'b0}},1'b1};
+                // if ld is 1 then count will be v (LHS of the :), if ld is 0 then count will be whatever's on the RHS of the :
+ */
 
-/* // asynchronous reset
-always_ff @ (posedge clk, posedge rst) // what this means is it will check for the +ve rising edge of both the clock signal and reset signal, so if reset signal is high reset will happen regardless of what the clock signal is
-    if (rst) count <= {WIDTH{1'b0}};
-    else     count <= count + {{WIDTH-1{1'b0}}, en}; */
-
-// count up or down
-always_ff @ (posedge clk) 
-    if (rst) count <= {WIDTH{1'b0}};
-    else if (en) count <= count + {{WIDTH-1{1'b0}}, en};
-    else count <= count + {WIDTH{1'b1}};
+// step 2: single stepping
+always_ff @ (posedge clk)
+  if (rst) count <= {WIDTH{1'b0}};
+  else if (ld)  count <= count + {{WIDTH-1{1'b0}},1'b1};
+                // if ld is 1 then count will be v (LHS of the :), if ld is 0 then count will be whatever's on the RHS of the :
 
 endmodule
