@@ -15,7 +15,7 @@ module bin2bcd (
 	input  logic [7:0]   x,			// value ot be converted
 	output logic [11:0]  BCD     // BCD digits
 );	
-	 // Concatenation of input and output
+	// Concatenation of input and output
    logic  [19:0] result;  // no of bits = no_of_bit of x + 4* no of digits
    integer i;
    
