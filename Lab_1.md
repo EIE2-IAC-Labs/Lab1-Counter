@@ -6,7 +6,7 @@
 
 
 ## Lab 1 – Learning System Verilog with Verilator and Vbuddy
-##### *Peter Cheung, v1.2 - 28 Oct 2022*
+##### *Peter Cheung, v1.3 - 28 Oct 2022*
 
 ---
 ## Objectives
@@ -263,7 +263,7 @@ module counter #(
 
 always_ff @ (posedge clk)
   if (rst) count <= {WIDTH{1'b0}};
-  else     count <= ld ? v : count + {{WIDTH-1{1'b0}},1'b1}
+  else     count <= ld ? v : count + {{WIDTH-1{1'b0}},1'b1};
 endmodule
 ```
 
@@ -318,4 +318,4 @@ bin2bcd myDecoder (
 endmodule
 ```
 Modify the testbench file **_top_tb.cpp_** accordingly.  
-Modify the **_doit.sh_** file from task 3 to include all the modules (**_top.sv, counter.sv, bin2bcd.sv_** and **_top_tb.sv_**).  Compile and run the Verilated model.  Check that it works according to expectation.
+Modify the **_doit.sh_** file from task 3 to include all the modules (**_top.sv, counter.sv, bin2bcd.sv_** and **_top_tb.cpp_**).  Compile and run the Verilated model.  Check that it works according to expectation.
