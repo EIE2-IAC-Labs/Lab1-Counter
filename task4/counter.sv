@@ -5,7 +5,7 @@ module counter #(
   input  logic             clk,      // clock 
   input  logic             rst,      // reset 
   input  logic             en,       // enable (need to change the ld back to en cuz top.sv expects an input signal en)
-  // input  logic [WIDTH-1:0] v,        // value to preload
+  // input  logic [WIDTH-1:0] v,        // dun need value to preload in task 4 (not necessary)
   output logic [WIDTH-1:0] count     // count output
 );
 

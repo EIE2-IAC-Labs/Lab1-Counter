@@ -8,13 +8,8 @@ module counter #(
     output logic [WIDTH-1:0] count       // count output
 );
 
-/* // synchronous reset
+/* // count up only
 always_ff @ (posedge clk) 
-    if (rst) count <= {WIDTH{1'b0}};
-    else     count <= count + {{WIDTH-1{1'b0}}, en}; */
-
-/* // asynchronous reset
-always_ff @ (posedge clk, posedge rst) // what this means is it will check for the +ve rising edge of both the clock signal and reset signal, so if reset signal is high reset will happen regardless of what the clock signal is
     if (rst) count <= {WIDTH{1'b0}};
     else     count <= count + {{WIDTH-1{1'b0}}, en}; */
 

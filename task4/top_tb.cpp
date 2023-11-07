@@ -1,6 +1,6 @@
 // this task focus on displaying BCD numbers on the Vbuddy, ignore the pre-loading
 
-#include "Vtop.h"  // change "Vcounter.h" to "Vtop.h" 
+#include "Vtop.h"  // change "Vcounter.h" to "Vtop.h" (depends on the name of ur current top most sv file)
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include "vbuddy.cpp"
@@ -12,6 +12,8 @@ int main(int argc, char **argv, char **env) {
     Verilated::commandArgs(argc, argv);
     // init top verilog instance
     Vtop* top = new Vtop; // cuz now the instance of the device we're running is Vtop (top.sv) so need change from Vcounter to Vtop
+
+    // top just represents top level component
 
     // init trace dump
     Verilated::traceEverOn(true);

@@ -50,8 +50,8 @@ int main(int argc, char **argv, char **env) {
         // ---- end of Vbuddy output section
 
         // change input stimuli
-        // top->rst = (i <2) | (i == 15); // reset signal is high if cycle number is <2 or is cycle 15
-        top->rst = i<2; // we need this line cuz if not rst is always 1
+        top->rst = (i <2) | (i == 15); // reset signal is high if cycle number is <2 or is cycle 15
+        // top->rst = i<2; // we need this line cuz if not rst is always 1
         // top->en = (i>4);
         top->en = vbdFlag(); // making the Flag the one that enables and disables counting
     
