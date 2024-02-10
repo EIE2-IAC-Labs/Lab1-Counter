@@ -15,19 +15,19 @@ module bin2bcd (
 	input  logic [7:0]   x,			// value ot be converted
 	output logic [11:0]  BCD     // BCD digits
 );	
-	 // Concatenation of input and output
+	// Concatenation of input and output
    logic  [19:0] result;  // no of bits = no_of_bit of x + 4* no of digits
    integer i;
    
    always_comb
    begin
-      result[19:0] = 0;
-      result[7:0] = x;     // bottom 8 bits has input value
+      result[19:0] = 0;    // result = 0000 0000 0000 0000 0000 in hex(?)
+      result[7:0] = x;     // assign the bottom 8 bits to x, bottom 8 bits has input value
 
       for (i=0; i<8; i=i+1) begin
 			// Check if unit digit >= 5
          if (result[11:8] >= 5)
-            result[11:8] = result[11:8] + 4'd3;
+            result[11:8] = result[11:8] + 4'd3; // 4'd3 means 3
 				
          // Check if ten digit >= 5
          if (result[15:12] >= 5)
