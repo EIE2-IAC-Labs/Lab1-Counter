@@ -205,7 +205,9 @@ For Windows users, run the following script:
 ```bash
 ~/Documents/iac/lab0-devtools/tools/attach_usb.sh
 ```
+This uses usbipd to search for the USB port that Vbuddy is connected to and share it with WSL. The script must be run every time Vbuddy is reconnected to the computer. You may wish to include this as a line at the start of your `doit.sh` script so that it runs automatically every time you run your code.
 
+Next enter the following command to find the name of your device:
 ```bash
 ls /dev/ttyU*
 ```
@@ -216,7 +218,7 @@ You should see a device name similar to this:
 
 ---
 
-Create a file: **_vbuddy.cfg_**, which contains the device name as the only line (terminated with CR).  You may use VS Code or the Linux nano editor to do this.
+Create a file: **_vbuddy.cfg_**, which contains the device name as the only line (terminated with CR).  You may use VS Code or the Linux nano editor to do this. You should only have to do this once, as the device name will usually be the same when Vbuddy is reconnected.
 
 **Step 2: Modify testbench for Vbuddy**
 
